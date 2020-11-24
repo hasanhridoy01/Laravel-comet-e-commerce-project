@@ -1,6 +1,12 @@
 (function($){
     $(document).ready(function(){
 
+        //datatable change
+        $('table#dataTable').DataTable();
+        
+        //Ck editor
+        CKEDITOR.replace('post_editor');
+
         // Logout system
         $('a#logout-button').click(function(e){
             e.preventDefault();
@@ -23,6 +29,15 @@
                 }
             });
 
+
+        });
+
+        //file image show
+        $('#fimage').change(function(e){
+            e.preventDefault();
+
+            let file_url =  URL.createObjectURL(e.target.files[0]);
+            $('img#photo_show').attr('src', file_url)
 
         });
 
