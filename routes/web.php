@@ -34,8 +34,13 @@ Route::get('post-category-published/{id}', 'App\Http\Controllers\CategoryControl
 
 //tag management Route
 Route::resource('tag', 'App\Http\Controllers\TagController');
+Route::get('tag-edit/{id}', 'App\Http\Controllers\TagController@edit') -> name('tag.edit');
+Route::post('tag-update', 'App\Http\Controllers\TagController@update') -> name('tag.update');
+Route::get('tag-unpublished/{id}', 'App\Http\Controllers\TagController@unpublishedTags') -> name('tag.unpublished');
+Route::get('tag-published/{id}', 'App\Http\Controllers\TagController@publishedTags') -> name('tag.published');
 
 //post management Route
 Route::resource('post', 'App\Http\Controllers\PostController');
+Route::get('post-edit/{id}', 'App\Http\Controllers\PostController@edit') -> name('post.edit');
 Route::get('post-post-unpublished/{id}', 'App\Http\Controllers\PostController@unpublishedCategory') -> name('post.unpublished');
 Route::get('post-post-published/{id}', 'App\Http\Controllers\PostController@publishedCategory') -> name('post.published');

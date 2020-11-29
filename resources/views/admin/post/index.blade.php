@@ -78,7 +78,7 @@
                                             @endif
                                             <a id="post_edit" data-toggle="modal" post_id="{{  $data -> id }}" class="btn  btn-warning btn-sm" href="#post_modal_update">Edit</a>
 
-                                                <form style="display: inline;" action="{{ route('post-category.destroy', $data -> id ) }}" method="POST">
+                                                <form style="display: inline;" action="{{ route('post.destroy', $data -> id ) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button class="btn btn-sm btn-danger">delete</button>
@@ -144,19 +144,31 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Update Tag</h4>
+                        <h4 class="modal-title">Update Post</h4>
                         <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{ route('category.update') }}"  method="POST">
+                        <form id="post_edit_form" action="{{ route('category.update') }}"  method="POST">
                             @csrf
+
                             <div class="form-group">
-                                <input name="name" class="form-control" type="text" placeholder="Name">
+                                <input name="title" class="form-control" type="text" placeholder="Name">
                                 <input name="id" class="form-control" type="hidden" placeholder="Name">
                             </div>
+
+                            <div class="form-group">
+                                <input name="content" class="form-control" type="text" placeholder="content">
+                            </div>
+
+                            <div class="form-group">
+                                <img src="" alt="" style="height: 200px; width: 200px; border: 5px solid gray;">
+                                <input name="fimg" class="form-control" type="hidden" placeholder="Featured_images">
+                            </div>
+
                             <div class="form-group">
                                 <input class="btn btn-block btn-primary" type="submit" value="Update">
                             </div>
+
                         </form>
                     </div>
                 </div>

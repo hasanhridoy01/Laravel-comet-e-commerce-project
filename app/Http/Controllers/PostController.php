@@ -90,7 +90,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $all_post = Post::find($id);
+        $all_cat = Category::find($id);
+        return $all_post;
+        return $all_cat;
     }
 
     /**
@@ -113,7 +116,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $posts = Post::find($id);
+        $posts -> delete();
+
+        //return with home page
+        return redirect() -> route('post.index') -> with('success', 'Post Deleted successful');
     }
 
     /**

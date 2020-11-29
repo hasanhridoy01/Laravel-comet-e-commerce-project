@@ -68,7 +68,11 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $all_tag = Tag::find($id);
+        return [
+            'name' => $all_tag -> name,
+            'id' => $all_tag -> id,
+        ];
     }
 
     /**
@@ -78,9 +82,16 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request)
+    {   
+        $id = $request -> id;
+        $tag = Tag::find($id);
+
+        $tag -> name = $request -> name;
+        $tag -> slug = Str::slug($request -> name);
+        $tag -> update();
+
+        return redirect() -> route('tag.index') -> with('success', 'Tag Update Successfull');
     }
 
     /**
@@ -91,6 +102,34 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tags = Tag::find($id);
+        $tags -> delete();
+
+        return redirect() -> route('tag.index') -> with('success', 'Tag Deleted Successfull');
+    }
+
+
+    /**
+     * unpublished Tag Method
+     */
+    public function unpublishedTags($id)
+    {
+        $data = Tag::find($id);
+        $data -> status  = 'unpublished';
+        $data -> update();
+
+        return redirect() -> route('post-category.index') -> with('success', 'Tag Unpublished successful');
+    }
+
+    /**
+     * publishedCategory Tag Method
+     */
+    public function publishedTags($id){
+
+        $data = Tag::find($id);
+        $data -> status = 'Published';
+        $data -> update();
+
+        return redirect() -> route('post-category.index') -> with('success', 'Tag Published successful');
     }
 }

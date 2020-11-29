@@ -41,6 +41,46 @@
 
         });
 
+        //tag edit
+        $(document).on('click', '#tag_edit', function(e){
+            e.preventDefault()
+            
+            //id recive
+            let id = $(this).attr('edit_id');
+            
+            //ajax requirest
+            $.ajax({
+                url : 'tag-edit/' + id,
+                dataType : "json",
+                success : function(data){
+                    $('form#tag_edit_form input[name="name"]').val(data.name);
+                    $('form#tag_edit_form input[name="id"]').val(data.id);
+                }
+            });
+
+        });
+
+        //post edit
+        $(document).on('click','#post_edit', function(e){
+            e.preventDefault()
+
+            //get id
+            let id = $(this).attr('post_id');
+
+            //ajax requirest
+            $.ajax({
+                url : 'post-edit/' + id,
+                dataType : "json",
+                success : function(data){
+                    $('form#post_edit_form input[name="title"]').val(data.title);
+                    $('form#post_edit_form input[name="id"]').val(data.id);
+                    $('form#post_edit_form input[name="content"]').val(data.content);
+                    $('form#post_edit_form input[name="fimg"]').val(data.featured_image);
+                    $('form#post_edit_form img').attr('src', 'media/posts/' +  data.featured_image);
+                }
+            });
+        });
+
 
     });
 })(jQuery)
