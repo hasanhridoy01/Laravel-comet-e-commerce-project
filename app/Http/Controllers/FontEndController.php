@@ -14,12 +14,13 @@ class FontEndController extends Controller
 
     public function BlogPage()
     {   
-    	$all_post = Post::latest() -> get();
+    	$all_post = Post::latest() -> paginate(5);
     	return view('fontend.blog', compact('all_post'));
     }
 
-    public function SingleBlogPage()
-    {
-    	return view('fontend.blog-single');
+    public function SingleBlogPage($slug)
+    {   
+        $single_post = Post::where('slug', $slug) ->  first();
+    	return view('fontend.blog-single', compact('single_post'));
     }
 }

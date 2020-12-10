@@ -20,7 +20,7 @@ Route::get('/', function () {
 //FontEnd Page Load
 Route::get('home-page', 'App\Http\Controllers\FontEndController@HomePage') -> name('home');
 Route::get('blog', 'App\Http\Controllers\FontEndController@BlogPage') -> name('blog');
-Route::get('blog-single', 'App\Http\Controllers\FontEndController@SingleBlogPage') -> name('single-blog');
+Route::get('blog-single/{slug}', 'App\Http\Controllers\FontEndController@SingleBlogPage') -> name('blog.single');
 
 Auth::routes();
 

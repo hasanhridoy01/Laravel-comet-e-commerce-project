@@ -40,6 +40,7 @@
                                     <th>Categories</th>
                                     <th>Tags</th>
                                     <th>Featured Image</th>
+                                    <th>Author</th>
                                     <th>Time</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -56,12 +57,13 @@
                                              {{ $category -> name }} |
                                            @endforeach
                                         </td>
-                                        <td>{{ $data -> tags }}</td>
+                                        <td>{{ $data -> tag }}</td>
                                         <td>
                                             @if( !empty($data -> featured_image) )
                                             <img style="height: 60px; width: 60px;" src="{{ URL::to('/') }}/media/posts/{{ $data -> featured_image }}" alt="">
                                             @endif
                                         </td>
+                                        <td>{{ $data -> Author -> name }}</td>
                                         <td>{{ $data -> created_at -> diffForHumans() }}</td>
                                         <td>
                                             @if($data -> status == 'Published')
