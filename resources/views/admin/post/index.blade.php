@@ -78,7 +78,7 @@
                                             @else
                                                 <a class="btn btn-sm btn-success" href="{{ route('post.published', $data -> id ) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                             @endif
-                                            <a id="post_edit" data-toggle="modal" post_id="{{  $data -> id }}" class="btn  btn-warning btn-sm" href="#post_modal_update">Edit</a>
+                                            <a id="post_edit" post_id="{{  $data -> id }}" class="btn  btn-warning btn-sm" href="#">Edit</a>
 
                                                 <form style="display: inline;" action="{{ route('post.destroy', $data -> id ) }}" method="POST">
                                                     @csrf
@@ -143,7 +143,7 @@
 
 
         <div id="post_modal_update" class="modal fade">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Update Post</h4>
@@ -159,12 +159,20 @@
                             </div>
 
                             <div class="form-group">
-                                <input name="content" class="form-control" type="text" placeholder="content">
+                                <label for="">Categoris</label>
+                                <div class="cl"></div>
                             </div>
 
                             <div class="form-group">
+                                 <input name="fimg" class="form-control" type="hidden" placeholder="Featured_images">
                                 <img src="" alt="" style="height: 200px; width: 200px; border: 5px solid gray;">
-                                <input name="fimg" class="form-control" type="hidden" placeholder="Featured_images">
+                                <br>
+                                <br>
+                                <label style="margin-left: 3px; font-size: 40px; cursor: pointer;" for="fimage"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea id="post_editor_edit" name="content"></textarea>
                             </div>
 
                             <div class="form-group">

@@ -91,9 +91,33 @@ class PostController extends Controller
     public function edit($id)
     {
         $all_post = Post::find($id);
-        $all_cat = Category::find($id);
-        return $all_post;
-        return $all_cat;
+        $all_cat = Category::all();
+        
+        $post_cat = $all_post -> categoris;
+        
+        $checked_id = [];
+        foreach ( $post_cat as $checked_cat ) {
+           array_push($checked_id, $checked_cat -> id) ;
+        }
+        
+        $cat_list = '';
+        foreach ( $all_cat as $cat ) {
+            if ( in_array($cat -> id, $checked_id) ) {
+                $checked = 'checked';
+            }else{
+                $checked = '';
+            }
+            $cat_list .= '
+                        <input type="checkbox" '.$checked.' id="cn" value="'.$cat -> id.'" name="categoris[]">'.$cat -> name.'<label for="cn"></label>
+                        <br>';
+        }
+
+        return [
+            'title' => $all_post -> title,
+            'featured_image' => $all_post -> featured_image,
+            'content' => $all_post -> content,
+            'cat_list' => $cat_list,
+        ];
     }
 
     /**

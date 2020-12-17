@@ -30,7 +30,7 @@
               <article class="post-single">
                 <div class="post-info">
                   <h2><a href="#">{{ $posts -> title }}</a></h2>
-                  <h6 class="upper"><span>By</span><a href="#"> {{ $posts -> Author -> name }} </a><span class="dot"></span><span>{{ $posts -> created_at -> diffForHumans() }}</span><span class="dot"></span>
+                  <h6 class="upper"><span>By</span><a href="#"> {{ $posts -> Author -> name }} </a><span class="dot"></span><span>{{ date('F d, Y',strtotime($posts -> created_at)) }}</span><span class="dot"></span>
                     @foreach( $posts -> categoris as $cat )
                     <a href="{{ $cat -> slug }}" class="post-tag">{{ $cat -> name }}</a>,
                     @endforeach
@@ -48,7 +48,7 @@
                   </div>
                 </div>
                 <div class="post-body">
-                  {!! htmlspecialchars_decode( $posts -> content ) !!}
+                  {!! Str::of(htmlspecialchars_decode( $posts -> content )) -> words(50,' ...'); !!}
                   <p><a href="{{ route('blog.single', $posts -> slug) }}" class="btn btn-color btn-sm">Read More</a>
                   </p>
                 </div>
@@ -62,7 +62,7 @@
             {{ $all_post -> links() }}
             </ul>
 
-            <ul class="pagination">
+            {{-- <ul class="pagination">
               <li><a href="#" aria-label="Previous"><span aria-hidden="true"><i class="ti-arrow-left"></i></span></a>
               </li>
               <li class="active"><a href="#">1</a>
@@ -77,7 +77,7 @@
               </li>
               <li><a href="#" aria-label="Next"><span aria-hidden="true"><i class="ti-arrow-right"></i></span></a>
               </li>
-            </ul>
+            </ul> --}}
             <!-- end of pagination-->
           </div>
 

@@ -6,6 +6,7 @@
         
         //Ck editor
         CKEDITOR.replace('post_editor');
+        CKEDITOR.replace('post_editor_edit');
 
         // Logout system
         $('a#logout-button').click(function(e){
@@ -60,6 +61,12 @@
 
         });
 
+        //post edit modal show
+        $(document).on('click','a#post_edit', function(e){
+            e.preventDefault();
+            $('#post_modal_update').modal('show');
+        });
+
         //post edit
         $(document).on('click','#post_edit', function(e){
             e.preventDefault()
@@ -74,7 +81,8 @@
                 success : function(data){
                     $('form#post_edit_form input[name="title"]').val(data.title);
                     $('form#post_edit_form input[name="id"]').val(data.id);
-                    $('form#post_edit_form input[name="content"]').val(data.content);
+                    $('form#post_edit_form textarea[name="content"]').val(data.content);
+                    $('#post_modal_update .cl').html(data.cat_list);
                     $('form#post_edit_form input[name="fimg"]').val(data.featured_image);
                     $('form#post_edit_form img').attr('src', 'media/posts/' +  data.featured_image);
                 }
