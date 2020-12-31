@@ -150,12 +150,12 @@
                         <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <form id="post_edit_form" action="{{ route('category.update') }}"  method="POST">
+                        <form id="post_edit_form" action="{{ route('post.update') }}"  method="POST">
                             @csrf
 
                             <div class="form-group">
                                 <input name="title" class="form-control" type="text" placeholder="Name">
-                                <input name="id" class="form-control" type="hidden" placeholder="Name">
+                                <input name="id" class="form-control" type="hidden">
                             </div>
 
                             <div class="form-group">
@@ -164,15 +164,15 @@
                             </div>
 
                             <div class="form-group">
-                                 <input name="fimg" class="form-control" type="hidden" placeholder="Featured_images">
-                                <img src="" alt="" style="height: 200px; width: 200px; border: 5px solid gray;">
+                                 <input name="upfimg" class="form-control" type="hidden" placeholder="Featured_images">
+                                <img id="post_featured_img" src="" alt="" style="height: 200px; width: 200px; border: 5px solid gray;">
                                 <br>
                                 <br>
                                 <label style="margin-left: 3px; font-size: 40px; cursor: pointer;" for="fimage"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
                             </div>
 
                             <div class="form-group">
-                                <textarea id="post_editor_edit" name="content"></textarea>
+                                <textarea id="" class="form-control" name="content" rows="5"></textarea>
                             </div>
 
                             <div class="form-group">

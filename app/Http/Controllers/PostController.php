@@ -114,6 +114,7 @@ class PostController extends Controller
 
         return [
             'title' => $all_post -> title,
+            'id' => $all_post -> id,
             'featured_image' => $all_post -> featured_image,
             'content' => $all_post -> content,
             'cat_list' => $cat_list,
@@ -127,9 +128,35 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request)
+    {   
+        //get id
+        $id = $request -> id;
+        $data = Post::find($id);
+
+        // //file get
+        // if ( $request -> hasFile('upfimg') ) {
+        //     $fimage = $request -> file('upfimg');
+        //     $unique_img = md5(time().rand()) .'.'. $fimage -> getClientOriginalExtension();
+        //     $fimage -> move(public_path('media/posts/'), $unique_fimg);
+        // }else{
+        //     $unique_img = $unique_fimg;
+        // }
+        
+        // //Update Data
+        $data -> title = $request -> title;
+        $data -> content = $request -> content;
+        // $data -> featured_image = $unique_img;
+        $data -> update();
+
+        //category remove
+        $data -> categoris() -> detach();
+
+        //Category Update
+        $data -> categoris() -> attach($request -> categoris);
+
+        //return with page
+        return redirect() -> route('post.index') -> with('success', 'Post Updated successful');
     }
 
     /**

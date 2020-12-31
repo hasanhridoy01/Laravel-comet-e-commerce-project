@@ -22,6 +22,13 @@ Route::get('home-page', 'App\Http\Controllers\FontEndController@HomePage') -> na
 Route::get('blog', 'App\Http\Controllers\FontEndController@BlogPage') -> name('blog');
 Route::get('blog-single/{slug}', 'App\Http\Controllers\FontEndController@SingleBlogPage') -> name('blog.single');
 
+//blog post Search by category
+Route::get('category/{slug}', 'App\Http\Controllers\FontEndController@postByCategory') -> name('category.search');
+
+//post Search By Search Field
+Route::post('search', 'App\Http\Controllers\FontEndController@postBySearch') -> name('post.search');
+
+
 Auth::routes();
 
 //Category Management Route
@@ -42,5 +49,6 @@ Route::get('tag-published/{id}', 'App\Http\Controllers\TagController@publishedTa
 //post management Route
 Route::resource('post', 'App\Http\Controllers\PostController');
 Route::get('post-edit/{id}', 'App\Http\Controllers\PostController@edit') -> name('post.edit');
+Route::post('post-update', 'App\Http\Controllers\PostController@update') -> name('post.update');
 Route::get('post-post-unpublished/{id}', 'App\Http\Controllers\PostController@unpublishedCategory') -> name('post.unpublished');
 Route::get('post-post-published/{id}', 'App\Http\Controllers\PostController@publishedCategory') -> name('post.published');
