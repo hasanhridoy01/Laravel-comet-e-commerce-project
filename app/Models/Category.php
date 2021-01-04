@@ -15,4 +15,9 @@ class Category extends Model
     {
     	return $this -> belongsToMany('App\Models\Post');
     }
+
+    public function products()
+    {
+    	return $this -> belongsToMany('App\Models\Product');
+    }
 }

@@ -30,7 +30,7 @@
              $tags = App\Models\Tag::latest() -> take(5) -> get();
             @endphp
             @foreach( $tags as $tag )
-            <a href="#">{{ $tag -> name }}</a>
+            <a href="{{ route('tag.search', $tag -> slug) }}">{{ $tag -> name }}</a>
             @endforeach
           </div>
         </div>

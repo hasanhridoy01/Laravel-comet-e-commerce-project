@@ -57,7 +57,11 @@
                                              {{ $category -> name }} |
                                            @endforeach
                                         </td>
-                                        <td>{{ $data -> tag }}</td>
+                                        <td>
+                                            @foreach( $data -> tags as $tag )
+                                              {{ $tag -> name }} |
+                                            @endforeach
+                                        </td>
                                         <td>
                                             @if( !empty($data -> featured_image) )
                                             <img style="height: 60px; width: 60px;" src="{{ URL::to('/') }}/media/posts/{{ $data -> featured_image }}" alt="">
@@ -98,7 +102,7 @@
         </div>
 
         <div id="post_modal" class="modal fade">
-            <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Add new post</h4>
@@ -115,9 +119,17 @@
 
                             <div class="form-group">
                                 <label for="">Categoris</label>
-                                <br>
+                                <hr>
                                 @foreach( $all_cat as $cat )
                                 <input type="checkbox" id="cn" value="{{ $cat -> id }}" name="categoris[]"><label for="cn"> {{ $cat -> name }} </label><br>
+                                @endforeach
+                            </div>
+
+                            <div class="form-group">
+                                <label for="">Tags</label>
+                                <hr>
+                                @foreach( $all_tag as $tag )
+                                <input type="checkbox" id="tn" value="{{ $tag -> id }}" name="tag[]"><label for="tn"> {{ $tag -> name }} </label><br>
                                 @endforeach
                             </div>
 
@@ -150,7 +162,7 @@
                         <button class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                        <form id="post_edit_form" action="{{ route('post.update') }}"  method="POST">
+                        <form id="post_edit_form" action="{{ route('post.update') }}"  method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">
@@ -164,13 +176,18 @@
                             </div>
 
                             <div class="form-group">
-                                 <input name="upfimg" class="form-control" type="hidden" placeholder="Featured_images">
+                                <label for="">Tags</label>
+                                <div class="tg"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <input name="upfimg" id="uploadimg" class="form-control" type="file" style="display: none;">
                                 <img id="post_featured_img" src="" alt="" style="height: 200px; width: 200px; border: 5px solid gray;">
                                 <br>
                                 <br>
-                                <label style="margin-left: 3px; font-size: 40px; cursor: pointer;" for="fimage"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                                <label style="margin-left: 3px; font-size: 40px; cursor: pointer;" for="uploadimg"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
                             </div>
-
+                             
                             <div class="form-group">
                                 <textarea id="" class="form-control" name="content" rows="5"></textarea>
                             </div>

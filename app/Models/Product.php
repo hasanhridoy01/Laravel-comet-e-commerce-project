@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+class Product extends Model
 {
     use HasFactory;
 
@@ -18,11 +18,6 @@ class Post extends Model
 
     public function tags()
     {
-        return $this -> belongsToMany('App\Models\Tag');
-    }
-
-    public function Author()
-    {
-    	return $this -> belongsTo('App\Models\User', 'user_id', 'id');
+    	return $this -> belongsToMany('App\Models\Tag');
     }
 }

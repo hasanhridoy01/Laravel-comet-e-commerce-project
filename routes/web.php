@@ -17,13 +17,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//FontEnd Page Load
+//FontEnd post Page Load
 Route::get('home-page', 'App\Http\Controllers\FontEndController@HomePage') -> name('home');
 Route::get('blog', 'App\Http\Controllers\FontEndController@BlogPage') -> name('blog');
 Route::get('blog-single/{slug}', 'App\Http\Controllers\FontEndController@SingleBlogPage') -> name('blog.single');
 
+//frontend product page load
+Route::get('shop', 'App\Http\Controllers\FontEndController@ShopPage') -> name('shop');
+Route::get('shop-single-page', 'App\Http\Controllers\FontEndController@ShopSinglePage') -> name('shop.single');
+
+//product search by category
+Route::get('category-product/{slug}','App\Http\Controllers\FontEndController@ProductByCategory') -> name('category.product');
+Route::get('tag-product/{slug}','App\Http\Controllers\FontEndController@ProductByTag') -> name('tag.product');
+
+//single product search
+Route::get('product/{slug}','App\Http\Controllers\FontEndController@SingleProduct') -> name('product');
+
+//product search by search box
+Route::post('product-search','App\Http\Controllers\FontEndController@ProductSearch') -> name('product.search');
+
+
 //blog post Search by category
 Route::get('category/{slug}', 'App\Http\Controllers\FontEndController@postByCategory') -> name('category.search');
+
+//blog post search by tag
+Route::get('tag/{slug}', 'App\Http\Controllers\FontEndController@postByTag') -> name('tag.search');
 
 //post Search By Search Field
 Route::post('search', 'App\Http\Controllers\FontEndController@postBySearch') -> name('post.search');
@@ -52,3 +70,10 @@ Route::get('post-edit/{id}', 'App\Http\Controllers\PostController@edit') -> name
 Route::post('post-update', 'App\Http\Controllers\PostController@update') -> name('post.update');
 Route::get('post-post-unpublished/{id}', 'App\Http\Controllers\PostController@unpublishedCategory') -> name('post.unpublished');
 Route::get('post-post-published/{id}', 'App\Http\Controllers\PostController@publishedCategory') -> name('post.published');
+
+//product management Route
+Route::resource('product', 'App\Http\Controllers\ProductController');
+Route::get('product-edit/{id}', 'App\Http\Controllers\ProductController@edit') -> name('product.edit');
+Route::post('product-update', 'App\Http\Controllers\ProductController@update') -> name('product.update');
+Route::get('product-unpublished/{id}', 'App\Http\Controllers\ProductController@unpublished') -> name('product.unpublished');
+Route::get('product-published/{id}', 'App\Http\Controllers\ProductController@published') -> name('product.published');

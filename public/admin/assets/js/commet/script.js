@@ -43,12 +43,27 @@
         });
 
          //file image show
-        $('#fimage').change(function(e){
+        $('#uploadimg').change(function(e){
             e.preventDefault();
 
             let file_url =  URL.createObjectURL(e.target.files[0]);
             $('img#post_featured_img').attr('src', file_url)
 
+        });
+
+        //product file img change
+        $(document).on('change','#image', function(e){
+            e.preventDefault();
+            let file_img_url = URL.createObjectURL(e.target.files[0]);
+            $('img#photo_show_product').attr('src', file_img_url);
+        });
+
+        //product update form
+        $(document).on('change','#upmage', function(e){
+            e.preventDefault();
+
+            let file_upload_url = URL.createObjectURL(e.target.files[0]);
+            $('#photo_update_product').attr('src', file_upload_url);
         });
 
         //tag edit
@@ -92,8 +107,35 @@
                     $('form#post_edit_form input[name="id"]').val(data.id);
                     $('form#post_edit_form textarea').text(data.content);
                     $('#post_modal_update .cl').html(data.cat_list);
-                    $('form#post_edit_form input[name="fimg"]').val(data.featured_image);
+                    $('#post_modal_update .tg').html(data.tag_list);
+                    // $('form#post_edit_form input[name="upfimg"]').val(data.featured_image);
                     $('form#post_edit_form img').attr('src', 'media/posts/' +  data.featured_image);
+                }
+            });
+        });
+
+        //Product Update 
+        $(document).on('click','a#product_edit', function(e){
+            e.preventDefault();
+
+            //get id
+            let product_id = $(this).attr('product_id');
+
+            //ajax requiest
+            $.ajax({
+                url : 'product-edit/' + product_id,
+                dataType : "json",
+                success : function(data){
+                    $('form#product_update_form input[name="name"]').val(data.name);
+                    $('form#product_update_form input[name="id"]').val(data.id);
+                    $('form#product_update_form .cl').html(data.cat_list);
+                    $('form#product_update_form .tg').html(data.tag_list);
+                    $('form#product_update_form input[name="brand"]').val(data.brand);
+                    $('form#product_update_form input[name="price"]').val(data.price);
+                    $('form#product_update_form input[name="name"]').val(data.name);
+                    $('form#product_update_form img').attr('src', 'media/products/' + data.image);
+                    //modal show
+                    $('#tag_modal_update').modal('show');
                 }
             });
         });

@@ -26,16 +26,12 @@
           <div class="col-md-8">
             <div class="blog-posts">
               
-              @foreach( $all_post as $posts )
+              @foreach( $tags -> posts as $post )
               <article class="post-single">
                 <div class="post-info">
-                  <h2><a href="#">{{ $posts -> title }}</a></h2>
-                  <h6 class="upper"><span>By</span><a href="#"> {{ $posts -> Author -> name }} </a><span class="dot"></span><span>{{ date('F d, Y',strtotime($posts -> created_at)) }}</span><span class="dot"></span>
-                    @foreach( $posts -> categoris as $cat )
-                    <a href="{{ $cat -> slug }}" class="post-tag">{{ $cat -> name }}</a>,
-                    @endforeach
-                    <h5>Tags</h5>
-                    @foreach( $posts -> tags as $tag )
+                  <h2><a href="#">{{ $post -> title }}</a></h2>
+                  <h6 class="upper"><span>By</span><a href="#">  </a><span class="dot"></span><span>{{ date('F d, Y',strtotime($post -> created_at)) }}</span><span class="dot"></span>
+                    @foreach( $post -> tags as $tag )
                     <a href="{{ $tag -> slug }}" class="post-tag">{{ $tag -> name }}</a>,
                     @endforeach
                   </h6>
@@ -45,15 +41,15 @@
                     <ul class="slides">
 
                       <li>
-                        <img src="{{ URL::to('/') }}/media/posts/{{ $posts -> featured_image }}" alt="">
+                        <img src="{{ URL::to('/') }}/media/posts/{{ $post -> featured_image }}" alt="">
                       </li>
                      
                     </ul>
                   </div>
                 </div>
                 <div class="post-body">
-                  {!! Str::of(htmlspecialchars_decode( $posts -> content )) -> words(50,' ...'); !!}
-                  <p><a href="{{ route('blog.single', $posts -> slug) }}" class="btn btn-color btn-sm">Read More</a>
+                  {!! Str::of(htmlspecialchars_decode( $post -> content )) -> words(50,' ...'); !!}
+                  <p><a href="{{ route('blog.single', $post -> slug) }}" class="btn btn-color btn-sm">Read More</a>
                   </p>
                 </div>
               </article>
@@ -63,7 +59,7 @@
             </div>
 
             <ul class="pagination">
-            {{ $all_post -> links() }}
+            {{-- {{ $posts -> links() }} --}}
             </ul>
 
             {{-- <ul class="pagination">

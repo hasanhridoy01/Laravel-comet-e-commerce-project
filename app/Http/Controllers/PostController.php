@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -19,7 +20,8 @@ class PostController extends Controller
     {   
         $all_post = Post::latest() -> get();
         $all_cat = Category::latest() -> get();
-        return view('admin.post.index', compact('all_post', 'all_cat'));
+        $all_tag = Tag::latest() -> get();
+        return view('admin.post.index', compact('all_post', 'all_cat', 'all_tag'));
     }
 
     /**
@@ -67,6 +69,9 @@ class PostController extends Controller
         //category add
         $post_user -> categoris() -> attach($request -> categoris);
 
+        //tag add
+        $post_user -> tags() -> attach($request -> tag);
+
         //return with page
         return redirect() -> route('post.index') -> with('success', 'Post added successful');
     }
@@ -92,7 +97,27 @@ class PostController extends Controller
     {
         $all_post = Post::find($id);
         $all_cat = Category::all();
+        $all_tag = Tag::all();
+
+        //tag Update
+        $tag_cat = $all_post -> tags;
+
+        $checked_id = [];
+        foreach ( $tag_cat as $checked_tag ) {
+            array_push($checked_id, $checked_tag -> id);
+        }
         
+        $tag_list = '';
+        foreach ( $all_tag as $tags ) {
+            if ( in_array($tags -> id, $checked_id) ) {
+                $checked = 'checked';
+            }else{
+                $checked = '';
+            }
+            $tag_list .= '<input type="checkbox" '.$checked.' id="tg" value="'.$tags -> id.'" name="tag[]"><label for="tg">'.$tags -> name.'</label><br>';
+        }
+        
+        //Category Update
         $post_cat = $all_post -> categoris;
         
         $checked_id = [];
@@ -112,12 +137,15 @@ class PostController extends Controller
                         <br>';
         }
 
+
+
         return [
             'title' => $all_post -> title,
             'id' => $all_post -> id,
             'featured_image' => $all_post -> featured_image,
             'content' => $all_post -> content,
             'cat_list' => $cat_list,
+            'tag_list' => $tag_list,
         ];
     }
 
@@ -134,22 +162,28 @@ class PostController extends Controller
         $id = $request -> id;
         $data = Post::find($id);
 
-        // //file get
-        // if ( $request -> hasFile('upfimg') ) {
-        //     $fimage = $request -> file('upfimg');
-        //     $unique_img = md5(time().rand()) .'.'. $fimage -> getClientOriginalExtension();
-        //     $fimage -> move(public_path('media/posts/'), $unique_fimg);
-        // }else{
-        //     $unique_img = $unique_fimg;
-        // }
+        //file get
+        if ( $request -> hasFile('upfimg') ) {
+            $fimage = $request -> file('upfimg');
+            $unique_img = md5(time().rand()) .'.'. $fimage -> getClientOriginalExtension();
+            $fimage -> move(public_path('media/posts/'), $unique_img);
+            // unlink('media/posts/'. $unique_fimg );
+        }else{
+            $unique_img = $unique_fimg;
+        }
         
-        // //Update Data
+        //Update Data
         $data -> title = $request -> title;
         $data -> content = $request -> content;
-        // $data -> featured_image = $unique_img;
+        $data -> featured_image = $unique_img;
         $data -> update();
 
-        //category remove
+        //tag remove
+        $data -> tags() -> detach();
+
+        $data -> tags() -> attach($request -> tag);
+
+         //category remove
         $data -> categoris() -> detach();
 
         //Category Update

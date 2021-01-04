@@ -14,6 +14,7 @@
                     <a href="#"><i class="fe fe-document"></i> <span> Posts</span> <span class="menu-arrow"></span></a>
                    <ul style="display: none;">
                         <li><a href="{{ route('post.index') }}">All Posts</a></li>
+                        <li><a href="{{ route('product.index') }}">Product</a></li>
                         <li><a href="{{ route('post-category.index') }}">Category</a></li>
                         <li><a href="{{ route('tag.index') }}">tag</a></li>
                     </ul>
