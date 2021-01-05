@@ -108,7 +108,7 @@
                     $('form#post_edit_form textarea').text(data.content);
                     $('#post_modal_update .cl').html(data.cat_list);
                     $('#post_modal_update .tg').html(data.tag_list);
-                    // $('form#post_edit_form input[name="upfimg"]').val(data.featured_image);
+                    $('form#post_edit_form input[name="old photo"]').val(data.featured_image);
                     $('form#post_edit_form img').attr('src', 'media/posts/' +  data.featured_image);
                 }
             });

@@ -167,9 +167,7 @@ class PostController extends Controller
             $fimage = $request -> file('upfimg');
             $unique_img = md5(time().rand()) .'.'. $fimage -> getClientOriginalExtension();
             $fimage -> move(public_path('media/posts/'), $unique_img);
-            // unlink('media/posts/'. $unique_fimg );
-        }else{
-            $unique_img = $unique_fimg;
+            // unlink('media/posts/', $request -> old photo );
         }
         
         //Update Data

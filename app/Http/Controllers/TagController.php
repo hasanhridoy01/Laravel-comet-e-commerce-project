@@ -118,7 +118,7 @@ class TagController extends Controller
         $data -> status  = 'unpublished';
         $data -> update();
 
-        return redirect() -> route('post-category.index') -> with('success', 'Tag Unpublished successful');
+        return redirect() -> route('tag.index') -> with('success', 'Tag Unpublished successful');
     }
 
     /**
@@ -127,9 +127,9 @@ class TagController extends Controller
     public function publishedTags($id){
 
         $data = Tag::find($id);
-        $data -> status = 'Published';
+        $data -> status = 'published';
         $data -> update();
 
-        return redirect() -> route('post-category.index') -> with('success', 'Tag Published successful');
+        return redirect() -> route('tag.index') -> with('success', 'Tag Published successful');
     }
 }

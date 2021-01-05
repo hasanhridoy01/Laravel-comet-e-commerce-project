@@ -182,6 +182,7 @@
 
                             <div class="form-group">
                                 <input name="upfimg" id="uploadimg" class="form-control" type="file" style="display: none;">
+                                <input name="old photo" type="hidden">
                                 <img id="post_featured_img" src="" alt="" style="height: 200px; width: 200px; border: 5px solid gray;">
                                 <br>
                                 <br>
