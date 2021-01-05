@@ -91,7 +91,7 @@ class FontEndController extends Controller
     public function ProductSearch(Request $request)
     {
         $search_text = $request -> search;
-        $product = Product::where('name', 'LIKE', '%'.$search_text.'%') -> get();
+        $product = Product::where('name', 'LIKE', '%'.$search_text.'%') -> orWhere('price', 'LIKE', '%'.$search_text.'%') -> get();
         return view('fontend.product-search', compact('product'));
     }
 }
