@@ -3,6 +3,7 @@
 
         //datatable change
         $('table#dataTable').DataTable();
+        $('table#dataTabletwo').DataTable();
         
         //Ck editor
         CKEDITOR.replace('post_editor');
