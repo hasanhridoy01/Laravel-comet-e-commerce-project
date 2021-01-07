@@ -59,6 +59,20 @@
             $('img#photo_show_product').attr('src', file_img_url);
         });
 
+        //client img change
+        $(document).on('change','#cimage', function(e){
+            e.preventDefault();
+            let file_img_url = URL.createObjectURL(e.target.files[0]);
+            $('#client_image').attr('src', file_img_url);
+        });
+
+        //logo img change
+        $(document).on('change','#limage', function(e){
+            e.preventDefault();
+            let file_img_url = URL.createObjectURL(e.target.files[0]);
+            $('#logo_image').attr('src', file_img_url);
+        });
+
         //product update form
         $(document).on('change','#upmage', function(e){
             e.preventDefault();

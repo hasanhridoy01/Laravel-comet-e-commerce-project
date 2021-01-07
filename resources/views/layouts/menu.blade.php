@@ -20,8 +20,15 @@
                     </ul>
                 </li>
 
-                <li>
-                    <a href="settings.html"><i class="fe fe-vector"></i> <span>Settings</span></a>
+                 <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Settings </span> <span class="menu-arrow"></span></a>
+                   <ul style="display: none;">
+                        <li><a href="{{ route('logo.index') }}">Logo</a></li>
+                        <li><a href="{{ route('social.index') }}">Social Icon</a></li>
+                        <li><a href="{{ route('client.index') }}">Client</a></li>
+                        <li><a href="{{ route('copyright.index') }}">CopyRight</a></li>
+                        <li><a href="">Footer</a></li>
+                    </ul>
                 </li>
 
 

@@ -77,3 +77,20 @@ Route::get('product-edit/{id}', 'App\Http\Controllers\ProductController@edit') -
 Route::post('product-update', 'App\Http\Controllers\ProductController@update') -> name('product.update');
 Route::get('product-unpublished/{id}', 'App\Http\Controllers\ProductController@unpublished') -> name('product.unpublished');
 Route::get('product-published/{id}', 'App\Http\Controllers\ProductController@published') -> name('product.published');
+
+//web settings Route
+Route::get('settings/logo', 'App\Http\Controllers\SettingsController@LogoPageShow') -> name('logo.index');
+Route::put('settings/logo-update', 'App\Http\Controllers\SettingsController@LogoUpdate') -> name('logo.update');
+
+//web settings Route
+Route::get('settings/social', 'App\Http\Controllers\SettingsController@SocialPageShow') -> name('social.index');
+Route::post('settings/social-update', 'App\Http\Controllers\SettingsController@SocialUpdate') -> name('social.update');
+
+
+//web client Route
+Route::get('settings/client', 'App\Http\Controllers\SettingsController@ClientPageShow') -> name('client.index');
+Route::post('settings/client-update', 'App\Http\Controllers\SettingsController@ClientUpdate') -> name('client.update');
+
+//web copyright Route
+Route::get('settings/copyright', 'App\Http\Controllers\SettingsController@CopyRightPageShow') -> name('copyright.index');
+Route::post('settings/copyright-update', 'App\Http\Controllers\SettingsController@CopyRightUpdate') -> name('copyright.update');

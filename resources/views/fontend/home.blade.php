@@ -1,7 +1,12 @@
 @extends('fontend.layouts.app')
 
 @section('main-content')
-
+@php
+  $settings = App\Models\Settings::find(1);
+@endphp
+@php
+  $posts = App\Models\Post::latest() -> get();
+@endphp
 <!-- Home section-->
     <section id="home">
       <!-- Video background-->
@@ -343,24 +348,26 @@
         <div class="section-content">
           <div class="boxes clients">
             <div class="row">
+
               <div class="col-sm-4 col-xs-6 border-right border-bottom">
-                <img src="fontend/images/clients/1.png" alt="" data-animated="true" class="client-image">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $settings -> clients }}" alt="" data-animated="true" class="client-image">
               </div>
               <div class="col-sm-4 col-xs-6 border-right border-bottom">
-                <img src="fontend/images/clients/2.png" alt="" data-animated="true" data-delay="500" class="client-image">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $settings -> clients }}" alt="" data-animated="true" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-bottom">
-                <img src="fontend/images/clients/3.png" alt="" data-animated="true" data-delay="1000" class="client-image">
+              <div class="col-sm-4 col-xs-6 border-right border-bottom">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $settings -> clients }}" alt="" data-animated="true" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-right">
-                <img src="fontend/images/clients/4.png" alt="" data-animated="true" class="client-image">
+              <div class="col-sm-4 col-xs-6 border-right border-bottom">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $settings -> clients }}" alt="" data-animated="true" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-right">
-                <img src="fontend/images/clients/5.png" alt="" data-animated="true" data-delay="500" class="client-image">
+              <div class="col-sm-4 col-xs-6 border-right border-bottom">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $settings -> clients }}" alt="" data-animated="true" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6">
-                <img src="fontend/images/clients/6.png" alt="" data-animated="true" data-delay="1000" class="client-image">
+              <div class="col-sm-4 col-xs-6 border-right border-bottom">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $settings -> clients }}" alt="" data-animated="true" class="client-image">
               </div>
+              
             </div>
             <!-- end of row-->
           </div>
@@ -399,7 +406,8 @@
         <!-- end of container-->
       </div>
     </section>
-
+    
+    @foreach( $posts as $post )
     <section>
       <div class="container">
         <div class="title center">
@@ -410,38 +418,30 @@
         <div class="section-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
+
               <div class="blog-post">
                 <div class="post-body">
-                  <h3 class="serif"><a href="#">Checklists for Startups</a></h3>
+                  <h3 class="serif"><a href="#">{{ $post -> title }}</a></h3>
                   <hr>
-                  <p class="serif">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab corporis eos quod libero doloremque odio perspiciatis ratione cumque ex laboriosam, laborum accusantium quis quidem excepturi, adipisci neque, aliquam ea! [...]</p>
-                  <div class="post-info upper"><a href="#">Read More</a><span class="pull-right black-text">November 16, 2015</span>
-                  </div>
-                </div>
-                <!-- end of blog post-->
-              </div>
-              <div class="blog-post">
-                <div class="post-body">
-                  <h3 class="serif"><a href="#">Never Tell People What You Do</a></h3>
-                  <hr>
-                  <p class="serif">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ab corporis eos quod libero doloremque odio perspiciatis ratione cumque ex laboriosam, laborum accusantium quis quidem excepturi, adipisci neque, aliquam ea! [...]</p>
-                  <div class="post-info upper"><a href="#">Read More</a><span class="pull-right black-text">November 12, 2015</span>
+                  <p class="serif">{!! htmlspecialchars_decode($post -> content) !!}</p>
+                  <div class="post-info upper"><a href="#">Read More</a><span class="pull-right black-text">{{ date('F d, Y', strtotime($post -> created_at)) }}</span>
                   </div>
                 </div>
                 <!-- end of blog post-->
               </div>
             </div>
           </div>
+          {{-- {{ $posts -> links() }} --}}
           <!-- end of row-->
           <div class="clearfix"></div>
           <div class="mt-25">
-            <p class="text-center"><a href="#" class="btn btn-color-out">View Full Blog          </a>
+            <p class="text-center"><a href="{{ route('blog') }}" class="btn btn-color-out">View Full Blog</a>
             </p>
           </div>
         </div>
         <!-- end of container-->
       </div>
     </section>
-    
+    @endforeach
 
 @endsection

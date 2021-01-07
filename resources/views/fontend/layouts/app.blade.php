@@ -1,3 +1,6 @@
+@php
+  $settings = App\Models\Settings::find(1);
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,7 +52,7 @@
         <!-- Logo container-->
         <div class="logo">
           <a href="index-2.html">
-            <img src="fontend/images/logo_light.png" alt="" class="logo-light">
+            <img style="width: {{ $settings -> logo_width }};" src="media/settings/logo/{{ $settings -> logo_name }}" alt="" class="logo-light">
             <img src="fontend/images/logo_dark.png" alt="" class="logo-dark">
           </a>
         </div>
@@ -541,7 +544,7 @@
           <div class="row">
             <div class="col-md-4">
               <div class="copy-text">
-                <p><i class="icon-heart red mr-15"></i>© 2015 Comet Agency.</p>
+                <p><i class="icon-heart red mr-15"></i>{{ $settings -> crt }}</p>
               </div>
             </div>
             <div class="col-md-4">
@@ -563,20 +566,23 @@
             <div class="col-md-4">
               <div class="footer-social">
                 <ul>
+                  @php
+                   $social = json_decode($settings -> social);
+                  @endphp
                   <li>
-                    <a target="_blank" href="#"><i class="ti-facebook"></i></a>
+                    <a target="_blank" href="{{ $social -> facebook }}"><i class="ti-facebook"></i></a>
                   </li>
                   <li>
                     <a target="_blank" href="#"><i class="ti-twitter-alt"></i></a>
                   </li>
                   <li>
-                    <a target="_blank" href="#"><i class="ti-linkedin"></i></a>
+                    <a target="_blank" href="{{ $social -> linkedin }}"><i class="ti-linkedin"></i></a>
                   </li>
                   <li>
-                    <a target="_blank" href="#"><i class="ti-instagram"></i></a>
+                    <a target="_blank" href="{{ $social -> instagram }}"><i class="ti-instagram"></i></a>
                   </li>
                   <li>
-                    <a target="_blank" href="#"><i class="ti-dribbble"></i></a>
+                    <a target="_blank" href="{{ $social -> dribble }}"><i class="ti-dribbble"></i></a>
                   </li>
                 </ul>
               </div>
