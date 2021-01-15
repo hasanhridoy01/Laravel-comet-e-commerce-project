@@ -20,6 +20,17 @@
                     </ul>
                 </li>
 
+                <li class="submenu">
+                    <a href="#"><i class="fe fe-document"></i> <span> Home Settings </span> <span class="menu-arrow"></span></a>
+                   <ul style="display: none;">
+                        <li><a href="{{ route('slider.index') }}">Slider</a></li>
+                        <li><a href="{{ route('wwa.index') }}">Who We Are</a></li>
+                        <li><a href="{{ route('logo.index') }}">Testimonials</a></li>
+                        <li><a href="{{ route('logo.index') }}">Vision</a></li>
+                        <li><a href="{{ route('logo.index') }}">Home SetUp</a></li>
+                   </ul>
+                </li>
+
                  <li class="submenu">
                     <a href="#"><i class="fe fe-document"></i> <span> Settings </span> <span class="menu-arrow"></span></a>
                    <ul style="display: none;">
@@ -30,7 +41,6 @@
                         <li><a href="">Footer</a></li>
                     </ul>
                 </li>
-
 
             </ul>
         </div>

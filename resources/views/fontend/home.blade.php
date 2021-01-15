@@ -8,57 +8,55 @@
   $posts = App\Models\Post::latest() -> get();
 @endphp
 <!-- Home section-->
+    
+    @php
+     $slider = App\Models\HomePage::find(1);
+     $slider_content = json_decode($slider -> sliders);
+    @endphp
+
     <section id="home">
       <!-- Video background-->
       <div id="video-wrapper" data-fallback-bg="fontend/images/bg/5.jpg">
-        <div data-property="{videoURL: '9No-FiEInLA'}" class="player"></div>
+        <div data-property="{videoURL: '{{ $slider_content -> svideo }}'}" class="player"></div>
       </div>
       <!-- end of video background-->
       <!-- Home Slider-->
       <div id="home-slider" class="flexslider">
         <ul class="slides">
+          @foreach( $slider_content -> slider as $sliders )
           <li>
             <div class="slide-wrap">
               <div class="slide-content text-left bold-text">
                 <div class="container">
-                  <h6>Start building today. It's your turn.</h6>
-                  <h1 class="upper">Interactive design studio<span class="red-dot"></span></h1>
-                  <p><a href="#" class="btn btn-light-out">Read More</a><a href="#" class="btn btn-color btn-full">Services</a>
+                  <h6>{{ $sliders -> subtitle }}.</h6>
+                  <h1 class="upper">{{ $sliders -> title }}<span class="red-dot"></span></h1>
+                  <p><a href="{{ $sliders -> btn1_link }}" class="btn btn-light-out">{{ $sliders -> btn1_title }}</a><a href="{{ $sliders -> btn2_link }}" class="btn btn-color btn-full">{{ $sliders -> btn2_title }}</a>
                   </p>
                 </div>
               </div>
             </div>
           </li>
-          <li>
-            <div class="slide-wrap">
-              <div class="slide-content text-left bold-text">
-                <div class="container">
-                  <h6>We create websites and videos.</h6>
-                  <h1 class="upper">Welcome to comet<span class="red-dot"></span></h1>
-                  <p><a href="#" class="btn btn-color">Explore</a><a href="#" class="btn btn-light-out">Join us</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </li>
+          @endforeach
         </ul>
       </div>
       <!-- end of home slider-->
     </section>
     <!-- end of home section-->
-
-
+    @php
+      $wwa_data = App\Models\HomePage::find(1);
+      $wwa_json = json_decode($wwa_data -> wwa)
+    @endphp
     <section id="about">
       <div class="container">
         <div class="title center">
           <h4 class="upper">We are driven by creative.</h4>
-          <h2>Who We Are<span class="red-dot"></span></h2>
+          <h2>{{ $wwa_json -> title }}<span class="red-dot"></span></h2>
           <hr>
         </div>
         <div class="section-content">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <p class="lead-text serif text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt sed ad possimus magnam maiores. Ipsam quas velit blanditiis debitis consequuntur mollitia assumenda nam obcaecati illo! Dolores deleniti animi.</p>
+              <p class="lead-text serif text-center">{!! htmlspecialchars_decode($wwa_json -> content) !!}</p>
             </div>
           </div>
           <!-- end of row-->
@@ -67,8 +65,7 @@
       </div>
       <!-- end of container-->
     </section>
-
-
+    
     <section class="p-0 b-0">
       <div class="container-fluid">
         <div class="row">
@@ -87,38 +84,15 @@
             </div>
           </div>
           <!-- end of side background image-->
+          @foreach( $wwa_json -> service as $service )
           <div class="col-md-6 col-md-offset-6 col-sm-8 col-sm-offset-4">
             <div class="services">
               <div class="row">
                 <div class="col-sm-6 border-bottom border-right">
                   <div class="service"><i class="icon-focus"></i><span class="back-icon"><i class="icon-focus"></i></span>
-                    <h4>Branding</h4>
+                    <h4>{{ $service }}</h4>
                     <hr>
                     <p class="alt-paragraph">Facilis doloribus illum quis, expedita mollitia voluptate non iure, perspiciatis repellat eveniet volup.</p>
-                  </div>
-                  <!-- end of service-->
-                </div>
-                <div class="col-sm-6 border-bottom">
-                  <div class="service"><i class="icon-layers"></i><span class="back-icon"><i class="icon-layers"></i></span>
-                    <h4>Interactive</h4>
-                    <hr>
-                    <p class="alt-paragraph">Commodi totam esse quis alias, nihil voluptas repellat magni, id fuga perspiciatis, ut quia beatae, accus.</p>
-                  </div>
-                  <!-- end of service-->
-                </div>
-                <div class="col-sm-6 border-bottom border-right">
-                  <div class="service"><i class="icon-mobile"></i><span class="back-icon"><i class="icon-mobile"></i></span>
-                    <h4>Production</h4>
-                    <hr>
-                    <p class="alt-paragraph">Doloribus qui asperiores nisi placeat volup eum, nemo est, praesentium fuga alias sit quis atque accus.</p>
-                  </div>
-                  <!-- end of service-->
-                </div>
-                <div class="col-sm-6 border-bottom">
-                  <div class="service"><i class="icon-globe"></i><span class="back-icon"><i class="icon-globe"></i></span>
-                    <h4>Editing</h4>
-                    <hr>
-                    <p class="alt-paragraph">Aliquid repellat facilis quis. Sequi excepturi quis dolorem eligendi deleniti fuga rerum itaque.</p>
                   </div>
                   <!-- end of service-->
                 </div>
@@ -126,10 +100,12 @@
             </div>
             <!-- end of row-->
           </div>
+          @endforeach
         </div>
         <!-- end of row -->
       </div>
     </section>
+
 
     <section>
       <div class="container-fluid">

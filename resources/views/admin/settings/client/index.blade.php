@@ -26,7 +26,7 @@
                 @include('validate')
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Logo Upload</h4>
+                        <h4 class="card-title">Client Upload</h4>
                     </div>
                     <div class="card-body">
                        <form action="{{ route('client.update') }}" method="POST" enctype="multipart/form-data">

@@ -94,3 +94,11 @@ Route::post('settings/client-update', 'App\Http\Controllers\SettingsController@C
 //web copyright Route
 Route::get('settings/copyright', 'App\Http\Controllers\SettingsController@CopyRightPageShow') -> name('copyright.index');
 Route::post('settings/copyright-update', 'App\Http\Controllers\SettingsController@CopyRightUpdate') -> name('copyright.update');
+
+//home page settings route
+Route::group(['namespace' => 'App\Http\Controllers', 'prefix' => 'home'], function(){
+	Route::get('slider', 'HomePageController@SliderIndex') -> name('slider.index');
+	Route::post('slider/store', 'HomePageController@SliderStore') -> name('slider.store');
+	Route::get('wwa', 'HomePageController@WhoWeAreIndex') -> name('wwa.index');
+	Route::post('wwa/store', 'HomePageController@WhoWeAreStore') -> name('wwa.store');
+});

@@ -73,6 +73,13 @@
             $('#logo_image').attr('src', file_img_url);
         });
 
+        //slider img change
+        $(document).on('change','#Svideo', function(e){
+            e.preventDefault();
+            let file_slider_url = URL.createObjectURL(e.target.files[0]);
+            $('#slider_image').attr('src', file_slider_url);
+        });
+
         //product update form
         $(document).on('change','#upmage', function(e){
             e.preventDefault();
@@ -153,6 +160,26 @@
                     $('#tag_modal_update').modal('show');
                 }
             });
+        });
+
+        //slider section script
+        $(document).on('click','#comet_add_slide', function(e){
+            e.preventDefault();
+
+            let rand = Math.floor(Math.random() * 10000);
+
+            $('.comet-slider-container').append('<div id="slider-card-'+ rand +'" class="card">' + '<div data-toggle="collapse" data-target="#Slide-'+ rand +'" style="cursor: pointer;" class="card-header"><h4>#Slide'+ rand +'<button id="comet_slider_remove" remove_id="Slide-'+ rand +'" class="close">&times;</button></h4></div>' + '<div id="Slide-'+ rand +'" class="collapse">' + '<div class="card-body">' + '<div class="form-group">' + '<label for="">Sub Title</label>' + '<input type="text" name="subtitle[]" class="form-control" placeholder="Sub Title">' + '<input type="hidden" name="slide_code[]" value="'+ rand +'" class="form-control"' + '</div>' + '<br>' + '<div class="form-group">' + '<label for="">Main Title</label>' + '<input type="text" name="title[]" class="form-control" placeholder="Main Title">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Title</label>' + '<input type="text" name="btn1_title[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Link</label>' + '<input type="text" name="btn1_link[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Title</label>' + '<input type="text" name="btn2_title[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Link</label>' + '<input type="text" name="btn2_link[]" class="form-control">' + '</div>' + '</div>' + '</div>' + '</div>');
+            return false;
+        });
+
+        //slider remove
+         $(document).on('click','#comet_slider_remove', function(e){
+            e.preventDefault();
+
+            let remove_code = $(this).attr('remove_id');
+            $('#slider-card-'+ remove_code ).remove();
+            
+            return false;
         });
 
 
