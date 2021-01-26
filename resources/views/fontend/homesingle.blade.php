@@ -1,57 +1,60 @@
 @extends('fontend.layouts.app')
 
 @section('main-content')
-@php
-  $settings = App\Models\Settings::find(1);
-  $client_json = json_decode($settings -> clients)
-@endphp
-@php
-  $posts = App\Models\Post::latest() -> get();
-@endphp
-<!-- Home section-->
-    
+
     @php
-     $slider = App\Models\HomePage::find(1);
-     $slider_content = json_decode($slider -> sliders);
+     $data = App\Models\HomePage::find(1);
+     $client_data = App\Models\Settings::find(1);
+     $wwa_json = json_decode($data -> wwa);
+     $vision_json = json_decode($data -> vision);
+     $client_json = json_decode($client_data -> clients);
+    @endphp
+    @php
+      $slider_json = json_decode($sliders);
     @endphp
 
+    <!-- Home Section-->
     <section id="home">
-      <!-- Video background-->
-      <div id="video-wrapper" data-fallback-bg="fontend/images/bg/5.jpg">
-        <div data-property="{videoURL: '{{ $slider_content -> svideo }}'}" class="player"></div>
-      </div>
-      <!-- end of video background-->
       <!-- Home Slider-->
       <div id="home-slider" class="flexslider">
         <ul class="slides">
-          @foreach( $slider_content -> slider as $sliders )
+          
           <li>
+            <img src="{{ URL::to('/') }}/media/slider/img/{{ $slider_json -> sliderimage }}" alt="">
             <div class="slide-wrap">
-              <div class="slide-content text-left bold-text">
+              <div class="slide-content">
                 <div class="container">
-                  <h6>{{ $sliders -> subtitle }}.</h6>
-                  <h1 class="upper">{{ $sliders -> title }}<span class="red-dot"></span></h1>
-                  <p><a href="{{ $sliders -> btn1_link }}" class="btn btn-light-out">{{ $sliders -> btn1_title }}</a><a href="{{ $sliders -> btn2_link }}" class="btn btn-color btn-full">{{ $sliders -> btn2_title }}</a>
+                  @php
+                    $subtitle_data = json_decode($slider_json -> subtitle);
+                    $title_data = json_decode($slider_json -> title);
+                    $btn_titleone_data = json_decode($slider_json -> btn_title1);
+                    $btn_linkone_data = json_decode($slider_json -> btn_link1);
+                    $btn_titletwo_data = json_decode($slider_json -> btn_title2);
+                    $btn_linktwo_data = json_decode($slider_json -> btn_link2);
+                  @endphp
+                  @foreach( $title_data as $title )
+                  <h1>{{ $title -> title }}<span class="red-dot"></span></h1>
+                  @endforeach
+                  @foreach( $subtitle_data as $subtitle )
+                  <h6>{{ $subtitle -> subtitle }}</h6>
+                  @endforeach
+                  <p><a href="#" class="btn btn-light-out">Read More</a><a href="#" class="btn btn-color btn-full">Services</a>
                   </p>
                 </div>
               </div>
             </div>
           </li>
-          @endforeach
+          
         </ul>
       </div>
-      <!-- end of home slider-->
+      <!-- End Home Slider-->
     </section>
-    <!-- end of home section-->
-    @php
-      $wwa_data = App\Models\HomePage::find(1);
-      $wwa_json = json_decode($wwa_data -> wwa)
-    @endphp
+    <!-- End Home Section-->
     <section id="about">
       <div class="container">
         <div class="title center">
           <h4 class="upper">We are driven by creative.</h4>
-          <h2>{{ $wwa_json -> title }}<span class="red-dot"></span></h2>
+          <h2>{{  $wwa_json -> title }}<span class="red-dot"></span></h2>
           <hr>
         </div>
         <div class="section-content">
@@ -66,7 +69,6 @@
       </div>
       <!-- end of container-->
     </section>
-    
     <section class="p-0 b-0">
       <div class="container-fluid">
         <div class="row">
@@ -85,6 +87,7 @@
             </div>
           </div>
           <!-- end of side background image-->
+          {{-- @foreach( $wwa_json -> service as $service ) --}}
           @foreach( $wwa_json -> service as $service )
           <div class="col-md-6 col-md-offset-6 col-sm-8 col-sm-offset-4">
             <div class="services">
@@ -97,6 +100,30 @@
                   </div>
                   <!-- end of service-->
                 </div>
+                {{-- <div class="col-sm-6 border-bottom">
+                  <div class="service"><i class="icon-layers"></i><span class="back-icon"><i class="icon-layers"></i></span>
+                    <h4>Interactive</h4>
+                    <hr>
+                    <p class="alt-paragraph">Commodi totam esse quis alias, nihil voluptas repellat magni, id fuga perspiciatis, ut quia beatae, accus.</p>
+                  </div>
+                  
+                </div> --}}
+                {{-- <div class="col-sm-6 border-bottom border-right">
+                  <div class="service"><i class="icon-mobile"></i><span class="back-icon"><i class="icon-mobile"></i></span>
+                    <h4>Production</h4>
+                    <hr>
+                    <p class="alt-paragraph">Doloribus qui asperiores nisi placeat volup eum, nemo est, praesentium fuga alias sit quis atque accus.</p>
+                  </div>
+                  
+                </div> --}}
+                <div class="col-sm-6 border-bottom">
+                  <div class="service"><i class="icon-globe"></i><span class="back-icon"><i class="icon-globe"></i></span>
+                    <h4>{{ $service }}</h4>
+                    <hr>
+                    <p class="alt-paragraph">Aliquid repellat facilis quis. Sequi excepturi quis dolorem eligendi deleniti fuga rerum itaque.</p>
+                  </div>
+                  <!-- end of service-->
+                </div>
               </div>
             </div>
             <!-- end of row-->
@@ -106,8 +133,6 @@
         <!-- end of row -->
       </div>
     </section>
-
-
     <section>
       <div class="container-fluid">
         <div class="row">
@@ -120,45 +145,40 @@
         </div>
         <!-- end of row-->
       </div>
-      
-      @php
-       $data = App\Models\HomePage::find(1);
-       $Vision_data = json_decode($data -> vision);
-      @endphp
       <div class="container">
         <div class="row">
           <div class="col-md-5 col-sm-8">
             <div class="title">
               <h4 class="upper">Not just code.</h4>
-              <h3>{{ $Vision_data -> title }}<span class="red-dot"></span></h3>
+              <h3>{{ $vision_json -> title }}<span class="red-dot"></span></h3>
               <hr>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="text-box">
-                  <h4 class="upper small-heading">{{ $Vision_data -> headingone }}</h4>
-                  <p>{{ $Vision_data -> content }}</p>
+                  <h4 class="upper small-heading">{{ $vision_json -> headingone }}</h4>
+                  <p>{!! htmlspecialchars_decode($vision_json -> content) !!}.</p>
                 </div>
                 <!-- end of text box-->
               </div>
               <div class="col-sm-6">
                 <div class="text-box">
-                  <h4 class="upper small-heading">{{ $Vision_data -> headingtwo }}</h4>
-                  <p>{{ $Vision_data -> content }}</p>
+                  <h4 class="upper small-heading">{{ $vision_json -> headingtwo }}</h4>
+                  <p>{!! htmlspecialchars_decode($vision_json -> content) !!}</p>
                 </div>
                 <!-- end of text box-->
               </div>
               <div class="col-sm-6">
                 <div class="text-box">
-                  <h4 class="upper small-heading">{{ $Vision_data -> headingthree }}</h4>
-                  <p>{{ $Vision_data -> content }}</p>
+                  <h4 class="upper small-heading">{{ $vision_json -> headingthree }}</h4>
+                  <p>{!! htmlspecialchars_decode($vision_json -> content) !!}</p>
                 </div>
                 <!-- end of text box-->
               </div>
               <div class="col-sm-6">
                 <div class="text-box">
-                  <h4 class="upper small-heading">{{ $Vision_data -> headingfour }}</h4>
-                  <p>{{ $Vision_data -> content }}</p>
+                  <h4 class="upper small-heading">{{ $vision_json -> headingfour }}</h4>
+                  <p>{!! htmlspecialchars_decode($vision_json -> content) !!}</p>
                 </div>
                 <!-- end of text box-->
               </div>
@@ -168,11 +188,8 @@
         </div>
         <!-- end of row-->
       </div>
-
-
       <!-- end of container-->
     </section>
-
     <section id="portfolio" class="pb-0">
       <div class="container">
         <div class="row">
@@ -321,7 +338,6 @@
         <!-- end of portfolio grid-->
       </div>
     </section>
-
     <section>
       <div class="container">
         <div class="title center">
@@ -332,26 +348,24 @@
         <div class="section-content">
           <div class="boxes clients">
             <div class="row">
-
               <div class="col-sm-4 col-xs-6 border-right border-bottom">
                 <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name1 }}" alt="" data-animated="true" class="client-image">
               </div>
               <div class="col-sm-4 col-xs-6 border-right border-bottom">
-                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name2 }}" alt="" data-animated="true" class="client-image">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name2 }}" alt="" data-animated="true" data-delay="500" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-right border-bottom">
-                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name3 }}" alt="" data-animated="true" class="client-image">
+              <div class="col-sm-4 col-xs-6 border-bottom">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name3 }}" alt="" data-animated="true" data-delay="1000" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-right border-bottom">
+              <div class="col-sm-4 col-xs-6 border-right">
                 <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name4 }}" alt="" data-animated="true" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-right border-bottom">
-                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name5 }}" alt="" data-animated="true" class="client-image">
+              <div class="col-sm-4 col-xs-6 border-right">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name5 }}" alt="" data-animated="true" data-delay="500" class="client-image">
               </div>
-              <div class="col-sm-4 col-xs-6 border-right border-bottom">
-                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name6 }}" alt="" data-animated="true" class="client-image">
+              <div class="col-sm-4 col-xs-6">
+                <img src="{{ URL::to('/') }}/media/settings/client/{{ $client_json -> client_name6 }}" alt="" data-animated="true" data-delay="1000" class="client-image">
               </div>
-              
             </div>
             <!-- end of row-->
           </div>
@@ -359,7 +373,6 @@
         <!-- end of section content-->
       </div>
     </section>
-
     <section class="parallax">
       <div data-parallax="scroll" data-image-src="fontend/images/bg/7.jpg" class="parallax-bg"></div>
       <div class="parallax-overlay pb-50 pt-50">
@@ -390,8 +403,6 @@
         <!-- end of container-->
       </div>
     </section>
-    
-    @foreach( $posts as $post )
     <section>
       <div class="container">
         <div class="title center">
@@ -403,29 +414,33 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
 
+              @php
+               $all_post = App\Models\Post::latest() -> get();
+              @endphp
+              @foreach( $all_post as $posts )
               <div class="blog-post">
                 <div class="post-body">
-                  <h3 class="serif"><a href="#">{{ $post -> title }}</a></h3>
+                  <h3 class="serif"><a href="#">{{ $posts -> title }}</a></h3>
                   <hr>
-                  <p class="serif">{!! htmlspecialchars_decode($post -> content) !!}</p>
-                  <div class="post-info upper"><a href="#">Read More</a><span class="pull-right black-text">{{ date('F d, Y', strtotime($post -> created_at)) }}</span>
+                  <p class="serif"> {!! htmlspecialchars_decode($posts -> content) !!} [...]</p>
+                  <div class="post-info upper"><a href="#">Read More</a><span class="pull-right black-text">November 16, 2015</span>
                   </div>
                 </div>
                 <!-- end of blog post-->
               </div>
+              @endforeach
             </div>
           </div>
-          {{-- {{ $posts -> links() }} --}}
           <!-- end of row-->
           <div class="clearfix"></div>
           <div class="mt-25">
-            <p class="text-center"><a href="{{ route('blog') }}" class="btn btn-color-out">View Full Blog</a>
+            <p class="text-center"><a href="#" class="btn btn-color-out">View Full Blog          </a>
             </p>
           </div>
         </div>
         <!-- end of container-->
       </div>
     </section>
-    @endforeach
+
 
 @endsection

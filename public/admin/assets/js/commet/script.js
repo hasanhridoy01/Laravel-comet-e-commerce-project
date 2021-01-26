@@ -59,11 +59,51 @@
             $('img#photo_show_product').attr('src', file_img_url);
         });
 
-        //client img change
-        $(document).on('change','#cimage', function(e){
+        //client img change1
+        $(document).on('change','#cimage1', function(e){
             e.preventDefault();
-            let file_img_url = URL.createObjectURL(e.target.files[0]);
-            $('#client_image').attr('src', file_img_url);
+            let file_img_url1 = URL.createObjectURL(e.target.files[0]);
+            $('#client_image1').attr('src', file_img_url1);
+        });
+
+        //client img change2
+        $(document).on('change','#cimage2', function(e){
+            e.preventDefault();
+
+            let file_img_url2 = URL.createObjectURL(e.target.files[0]);
+            $('#client_image2').attr('src', file_img_url2);
+        });
+
+        //client img change3
+        $(document).on('change','#cimage3', function(e){
+            e.preventDefault();
+
+            let file_img_url3 = URL.createObjectURL(e.target.files[0]);
+            $('#client_image3').attr('src', file_img_url3);
+        });
+
+        //client img change4
+        $(document).on('change','#cimage4', function(e){
+            e.preventDefault();
+
+            let file_img_url4 = URL.createObjectURL(e.target.files[0]);
+            $('#client_image4').attr('src', file_img_url4);
+        });
+
+        //client img change5
+        $(document).on('change','#cimage5', function(e){
+            e.preventDefault();
+
+            let file_img_url5 = URL.createObjectURL(e.target.files[0]);
+            $('#client_image5').attr('src', file_img_url5);
+        });
+
+        //client img change6
+        $(document).on('change','#cimage6', function(e){
+            e.preventDefault();
+
+            let file_img_url6 = URL.createObjectURL(e.target.files[0]);
+            $('#client_image6').attr('src', file_img_url6);
         });
 
         //logo img change
@@ -73,8 +113,15 @@
             $('#logo_image').attr('src', file_img_url);
         });
 
-        //slider img change
+        //slider1 img change
         $(document).on('change','#Svideo', function(e){
+            e.preventDefault();
+            let file_slider_url = URL.createObjectURL(e.target.files[0]);
+            $('#slider_video').attr('src', file_slider_url);
+        });
+
+        //slider1 img change
+        $(document).on('change','#Simg', function(e){
             e.preventDefault();
             let file_slider_url = URL.createObjectURL(e.target.files[0]);
             $('#slider_image').attr('src', file_slider_url);
@@ -86,6 +133,14 @@
 
             let file_upload_url = URL.createObjectURL(e.target.files[0]);
             $('#photo_update_product').attr('src', file_upload_url);
+        });
+
+        //product update form
+        $(document).on('change','#slider_photo', function(e){
+            e.preventDefault();
+
+            let file_upload_url = URL.createObjectURL(e.target.files[0]);
+            $('#slider_image_show').attr('src', file_upload_url);
         });
 
         //tag edit
@@ -169,6 +224,36 @@
             let rand = Math.floor(Math.random() * 10000);
 
             $('.comet-slider-container').append('<div id="slider-card-'+ rand +'" class="card">' + '<div data-toggle="collapse" data-target="#Slide-'+ rand +'" style="cursor: pointer;" class="card-header"><h4>#Slide'+ rand +'<button id="comet_slider_remove" remove_id="Slide-'+ rand +'" class="close">&times;</button></h4></div>' + '<div id="Slide-'+ rand +'" class="collapse">' + '<div class="card-body">' + '<div class="form-group">' + '<label for="">Sub Title</label>' + '<input type="text" name="subtitle[]" class="form-control" placeholder="Sub Title">' + '<input type="hidden" name="slide_code[]" value="'+ rand +'" class="form-control"' + '</div>' + '<br>' + '<div class="form-group">' + '<label for="">Main Title</label>' + '<input type="text" name="title[]" class="form-control" placeholder="Main Title">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Title</label>' + '<input type="text" name="btn1_title[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Link</label>' + '<input type="text" name="btn1_link[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Title</label>' + '<input type="text" name="btn2_title[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Link</label>' + '<input type="text" name="btn2_link[]" class="form-control">' + '</div>' + '</div>' + '</div>' + '</div>');
+            return false;
+        });
+
+        //slider2 section script
+        $(document).on('click','#comet_add_slide2', function(e){
+            e.preventDefault();
+
+            let rand2 = Math.floor(Math.random() * 10000);
+
+            $('.comet-slider2-container').append('<div id="slider-card-'+ rand2 +'" class="card">' + '<div data-toggle="collapse" data-target="#Slide-'+ rand2 +'" style="cursor: pointer;" class="card-header"><h4>#Slide'+ rand2 +'<button id="comet_slider_remove2" remove_id="Slide-'+ rand2 +'" class="close">&times;</button></h4></div>' + '<div id="Slide-'+ rand2 +'" class="collapse">' + '<div class="card-body">' + '<div class="form-group">' + '<label for="">Sub Title</label>' + '<input type="text" name="subtitle[]" class="form-control" placeholder="Sub Title">' + '<input type="hidden" name="slide_code[]" value="'+ rand2 +'" class="form-control"' + '</div>' + '<br>' + '<div class="form-group">' + '<label for="">Title</label>' + '<input type="text" name="title[]" class="form-control" placeholder="Title">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Title</label>' + '<input type="text" name="btn_titleone[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Link</label>' + '<input type="text" name="btn_linkone[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Title</label>' + '<input type="text" name="btn_titletwo[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Link</label>' + '<input type="text" name="btn_linktwo[]" class="form-control">' + '</div>' + '</div>' + '</div>' + '</div>');
+            return false;
+        });
+
+        //slider2 section script
+        $(document).on('click','#comet_update_slide', function(e){
+            e.preventDefault();
+
+            let rand3 = Math.floor(Math.random() * 10000);
+
+            $('.comet-slider-update').append('<div id="slider-card-'+ rand3 +'" class="card">' + '<div data-toggle="collapse" data-target="#Slide-'+ rand3 +'" style="cursor: pointer;" class="card-header"><h4>#Slide'+ rand3 +'<button id="comet_slider_remove2" remove_id="Slide-'+ rand3 +'" class="close">&times;</button></h4></div>' + '<div id="Slide-'+ rand3 +'" class="collapse">' + '<div class="card-body">' + '<div class="form-group">' + '<label for="">Sub Title</label>' + '<input type="text" name="subtitle[]" class="form-control" placeholder="Sub Title">' + '<input type="hidden" name="slide_code[]" value="'+ rand3 +'" class="form-control"' + '</div>' + '<br>' + '<div class="form-group">' + '<label for="">Title</label>' + '<input type="text" name="title[]" class="form-control" placeholder="Title">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Title</label>' + '<input type="text" name="btn_titleone[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 01 Link</label>' + '<input type="text" name="btn_linkone[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Title</label>' + '<input type="text" name="btn_titletwo[]" class="form-control">' + '</div>' + '<div class="form-group">' + '<label for="">Button 02 Link</label>' + '<input type="text" name="btn_linktwo[]" class="form-control">' + '</div>' + '</div>' + '</div>' + '</div>');
+            return false;
+        });
+
+        //slider remove
+         $(document).on('click','#comet_slider_remove2', function(e){
+            e.preventDefault();
+
+            let remove_code2 = $(this).attr('remove_id');
+            $('#slider-card-'+ remove_code2 ).remove();
+            
             return false;
         });
 

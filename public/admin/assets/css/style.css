@@ -4141,3 +4141,18 @@ table.table-inbox tbody tr.checked {
 		display: none;
 	}
 }
+
+/*slider img settings*/
+.sliderimg{
+	height: 300px;
+	width: 100%;
+	padding: 10px;
+	border-radius: 15px;
+	transition: 0.75s;
+}
+.imgs{
+	overflow: hidden;
+}
+.sliderimg:hover{
+	transform: scale(1.1);
+}

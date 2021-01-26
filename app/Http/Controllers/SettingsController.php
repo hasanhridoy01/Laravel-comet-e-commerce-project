@@ -72,20 +72,91 @@ class SettingsController extends Controller
     //client update
     public function ClientUpdate(Request $request)
     {   
-        $old_logo = $request -> old_logo;
+        $old_logo1 = $request -> old_logo1;
 
-        if ( $request -> hasFile('new-logo') ) {
-            $client = $request -> file('new-logo');
-            $client_name = md5(time().rand()) .'.'. $client -> getClientOriginalExtension();
-            $client -> move(public_path('media/settings/client/'), $client_name);
-            unlink('media/settings/client/' . $old_logo);
+        if ( $request -> hasFile('new-logo1') ) {
+            $client1 = $request -> file('new-logo1');
+            $client_name1 = md5(time().rand()) .'.'. $client1 -> getClientOriginalExtension();
+            $client1 -> move(public_path('media/settings/client/'), $client_name1);
+            unlink('media/settings/client/' . $old_logo1);
         }else{
-            $client_name = $old_logo;
+            $client_name1 = $old_logo1;
         }
+
+        //image 2
+        $old_logo2 = $request -> old_logo2;
+
+        if ( $request -> hasFile('new-logo2') ) {
+            $client2 = $request -> file('new-logo2');
+            $client_name2 = md5(time().rand()) .'.'. $client2 -> getClientOriginalExtension();
+            $client2 -> move(public_path('media/settings/client/'), $client_name2);
+            unlink('media/settings/client/' . $old_logo2);
+        }else{
+            $client_name2 = $old_logo2;
+        }
+
+        //image 3
+        $old_logo3 = $request -> old_logo3;
+
+        if ( $request -> hasFile('new-logo3') ) {
+            $client3 = $request -> file('new-logo3');
+            $client_name3 = md5(time().rand()) .'.'. $client3 -> getClientOriginalExtension();
+            $client3 -> move(public_path('media/settings/client/'), $client_name3);
+            unlink('media/settings/client/' . $old_logo3);
+        }else{
+            $client_name3 = $old_logo3;
+        }
+
+        //image 4
+        $old_logo4 = $request -> old_logo4;
+
+        if ( $request -> hasFile('new-logo4') ) {
+            $client4 = $request -> file('new-logo4');
+            $client_name4 = md5(time().rand()) .'.'. $client4 -> getClientOriginalExtension();
+            $client4 -> move(public_path('media/settings/client/'), $client_name4);
+            unlink('media/settings/client/' . $old_logo4);
+        }else{
+            $client_name4 = $old_logo4;
+        }
+
+        //image 5
+        $old_logo5 = $request -> old_logo5;
+
+        if ( $request -> hasFile('new-logo5') ) {
+            $client5 = $request -> file('new-logo5');
+            $client_name5 = md5(time().rand()) .'.'. $client5 -> getClientOriginalExtension();
+            $client5 -> move(public_path('media/settings/client/'), $client_name5);
+            unlink('media/settings/client/' . $old_logo5);
+        }else{
+            $client_name5 = $old_logo5;
+        }
+
+        //image 6
+        $old_logo6 = $request -> old_logo6;
+
+        if ( $request -> hasFile('new-logo6') ) {
+            $client6 = $request -> file('new-logo6');
+            $client_name6 = md5(time().rand()) .'.'. $client6 -> getClientOriginalExtension();
+            $client6 -> move(public_path('media/settings/client/'), $client_name6);
+            unlink('media/settings/client/' . $old_logo6);
+        }else{
+            $client_name6 = $old_logo6;
+        }
+
+        $client_array = [
+             'client_name1' => $client_name1,
+             'client_name2' => $client_name2,
+             'client_name3' => $client_name3,
+             'client_name4' => $client_name4,
+             'client_name5' => $client_name5,
+             'client_name6' => $client_name6,
+        ];
+
+        $client_json = json_encode($client_array);
 
         $client_update = Settings::find(1);
 
-        $client_update -> clients = $client_name;
+        $client_update -> clients = $client_json;
         $client_update -> update();
 
         return redirect() -> back() -> with('success', 'Client Updated Successfull');

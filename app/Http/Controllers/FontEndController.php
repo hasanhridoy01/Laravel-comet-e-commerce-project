@@ -9,10 +9,17 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 
 class FontEndController extends Controller
-{
+{   
+    //home index
     public function HomePage()
     {
     	return view('fontend.home');
+    }
+    
+    //homepage two
+    public function HomePageTwo()
+    {
+        return view('fontend.hometwo');
     }
 
     public function BlogPage()

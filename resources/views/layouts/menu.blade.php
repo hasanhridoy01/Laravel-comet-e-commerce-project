@@ -16,6 +16,8 @@
                         <li><a href="{{ route('post.index') }}">All Posts</a></li>
                         <li><a href="{{ route('product.index') }}">Product</a></li>
                         <li><a href="{{ route('post-category.index') }}">Category</a></li>
+                        <li><a href="{{ route('slider-category.index') }}">SliderCategory</a></li>
+                        <li><a href="{{ route('slider-home.index') }}">Sliders</a></li>
                         <li><a href="{{ route('tag.index') }}">tag</a></li>
                     </ul>
                 </li>
@@ -26,7 +28,7 @@
                         <li><a href="{{ route('slider.index') }}">Slider</a></li>
                         <li><a href="{{ route('wwa.index') }}">Who We Are</a></li>
                         <li><a href="{{ route('logo.index') }}">Testimonials</a></li>
-                        <li><a href="{{ route('logo.index') }}">Vision</a></li>
+                        <li><a href="{{ route('vision.index') }}">Vision</a></li>
                         <li><a href="{{ route('logo.index') }}">Home SetUp</a></li>
                    </ul>
                 </li>

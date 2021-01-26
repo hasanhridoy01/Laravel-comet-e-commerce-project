@@ -19,6 +19,7 @@ Route::get('/', function () {
 
 //FontEnd post Page Load
 Route::get('home-page', 'App\Http\Controllers\FontEndController@HomePage') -> name('home');
+Route::get('home-page-two', 'App\Http\Controllers\FontEndController@HomePageTwo') -> name('hometwo');
 Route::get('blog', 'App\Http\Controllers\FontEndController@BlogPage') -> name('blog');
 Route::get('blog-single/{slug}', 'App\Http\Controllers\FontEndController@SingleBlogPage') -> name('blog.single');
 
@@ -101,4 +102,14 @@ Route::group(['namespace' => 'App\Http\Controllers', 'prefix' => 'home'], functi
 	Route::post('slider/store', 'HomePageController@SliderStore') -> name('slider.store');
 	Route::get('wwa', 'HomePageController@WhoWeAreIndex') -> name('wwa.index');
 	Route::post('wwa/store', 'HomePageController@WhoWeAreStore') -> name('wwa.store');
+	Route::get('vision', 'HomePageController@VisionIndex') -> name('vision.index');
+	Route::post('vision/store', 'HomePageController@VisionStore') -> name('vision.store');
 });
+
+
+//sliderCat control Route
+Route::resource('slider-category', 'App\Http\Controllers\SliderCatController');
+
+//slider Control Route
+Route::resource('slider-home','App\Http\Controllers\SliderController');
+Route::get('slider-home-edit/{id}','App\Http\Controllers\SliderController@SliderEdit') -> name('slider.edit');

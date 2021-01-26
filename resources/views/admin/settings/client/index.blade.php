@@ -20,7 +20,9 @@
         </div>
         <!-- /Page Header -->
 
-
+        @php
+          $client_data = json_decode($client -> clients);
+        @endphp
         <div class="row">
             <div class="col-lg-10">
                 @include('validate')
@@ -31,15 +33,71 @@
                     <div class="card-body">
                        <form action="{{ route('client.update') }}" method="POST" enctype="multipart/form-data">
                         @csrf
+                           <h4 style="color: red;">Client 1 Image</h4>
                            <div class="form-group">
-                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client -> clients }}" alt="">
+                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client_data -> client_name1 }}" alt="">
                                <br>
                                <br>
-                               <input type="hidden" name="old_logo" value="{{ $client -> clients }}">
-                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
-                               <input style="display: none;" type="file" id="cimage" name="new-logo">
+                               <input type="hidden" name="old_logo1" value="{{ $client_data -> client_name1 }}">
+                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage1"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                               <input style="display: none;" type="file" id="cimage1" name="new-logo1">
                                <br>
-                               <img id="client_image" src="" alt="" style="max-height: 150px; max-width: 150px;">
+                               <img id="client_image1" src="" alt="" style="max-height: 150px; max-width: 150px;">
+                           </div>
+                           <h4 style="color: yellow;">Client 2 Image</h4>
+                           <div class="form-group">
+                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client_data -> client_name2 }}" alt="">
+                               <br>
+                               <br>
+                               <input type="hidden" name="old_logo2" value="{{ $client_data -> client_name2 }}">
+                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage2"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                               <input style="display: none;" type="file" id="cimage2" name="new-logo2">
+                               <br>
+                               <img id="client_image2" src="" alt="" style="max-height: 150px; max-width: 150px;">
+                           </div>
+                           <h4 style="color: blue;">Client 3 Image</h4>
+                           <div class="form-group">
+                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client_data -> client_name3 }}" alt="">
+                               <br>
+                               <br>
+                               <input type="hidden" name="old_logo3" value="{{ $client_data -> client_name3 }}">
+                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage3"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                               <input style="display: none;" type="file" id="cimage3" name="new-logo3">
+                               <br>
+                               <img id="client_image3" src="" alt="" style="max-height: 150px; max-width: 150px;">
+                           </div>
+                           <h4 style="color: green;">Client 4 Image</h4>
+                           <div class="form-group">
+                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client_data -> client_name4 }}" alt="">
+                               <br>
+                               <br>
+                               <input type="hidden" name="old_logo4" value="{{ $client_data -> client_name4 }}">
+                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage4"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                               <input style="display: none;" type="file" id="cimage4" name="new-logo4">
+                               <br>
+                               <img id="client_image4" src="" alt="" style="max-height: 150px; max-width: 150px;">
+                           </div>
+                           <h4 style="color: gray;">Client 5 Image</h4>
+                           <div class="form-group">
+                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client_data -> client_name5 }}" alt="">
+                               <br>
+                               <br>
+                               <input type="hidden" name="old_logo5" value="{{ $client_data -> client_name5 }}">
+                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage5"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                               <input style="display: none;" type="file" id="cimage5" name="new-logo5">
+                               <br>
+                               <img id="client_image5" src="" alt="" style="max-height: 150px; max-width: 150px;">
+                           </div>
+                           <h4 style="color: orange;">Client 6 Image</h4>
+                           <div class="form-group">
+                               <img style="max-width: 150px; max-width: 150px;" class="bg-light" src="{{ URL::to('/') }}/media/settings/client/{{ $client_data -> client_name6 }}" alt="">
+                               <br>
+                               <br>
+                               <input type="hidden" name="old_logo6" value="{{ $client_data -> client_name6 }}">
+                                <label style="margin-left: 3px; font-size: 45px; cursor: pointer;" for="cimage6"><i class="fa fa-file-image-o" aria-hidden="true"></i></label>
+                               <input style="display: none;" type="file" id="cimage6" name="new-logo6">
+                               <br>
+                               <img id="client_image6" src="" alt="" style="max-height: 150px; max-width: 150px;">
                            </div>
                            <div class="form-group">
                                <input type="submit" value="Update" class="btn btn-info">

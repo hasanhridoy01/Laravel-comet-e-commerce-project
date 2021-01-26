@@ -74,4 +74,31 @@ class HomePageController extends Controller
        $wwa_data -> update();
        return redirect() -> back();
     }
+
+    //vision index show
+    public function VisionIndex()
+    { 
+      $vision = HomePage::find(1);
+      return view('admin.pages.home.vision.index', compact('vision'));
+    }
+
+    //vision Store
+    public function VisionStore(Request $request)
+    {  
+       $vison_array = [
+           'title' => $request -> title,
+           'content' => $request -> content,
+           'headingone' => $request -> headingone,
+           'headingtwo' => $request -> headingtwo,
+           'headingthree' => $request -> headingthree,
+           'headingfour' => $request -> headingfour,
+       ];
+       
+       $vision_json = json_encode($vison_array);
+
+       $data = HomePage::find(1);
+       $data -> vision = $vision_json;
+       $data -> update();
+       return redirect() -> back();
+    }
 }
