@@ -101,4 +101,19 @@ class FontEndController extends Controller
         $product = Product::where('name', 'LIKE', '%'.$search_text.'%') -> orWhere('price', 'LIKE', '%'.$search_text.'%') -> get();
         return view('fontend.product-search', compact('product'));
     }
+
+    //shop 4 col page show
+    public function ShopFourCol()
+    {   
+        $product = Product::latest() -> get();
+        return view('fontend.shop-4col', compact('product'));
+    }
+
+    //shop search 
+    public function ShopBySearch(Request $request)
+    {   
+        $search_text = $request -> search;
+        $data = Product::where('name', 'LIKE', '%'.$search_text.'%') ->  orWhere('price', 'LIKE', '%'.$search_text.'%') -> get();
+        return view('fontend.search-shop', compact('data'));
+    }
 }

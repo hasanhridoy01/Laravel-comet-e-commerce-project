@@ -26,6 +26,7 @@ Route::get('blog-single/{slug}', 'App\Http\Controllers\FontEndController@SingleB
 //frontend product page load
 Route::get('shop', 'App\Http\Controllers\FontEndController@ShopPage') -> name('shop');
 Route::get('shop-single-page', 'App\Http\Controllers\FontEndController@ShopSinglePage') -> name('shop.single');
+Route::get('shop-4cal', 'App\Http\Controllers\FontEndController@ShopFourCol') -> name('shop.col');
 
 //product search by category
 Route::get('category-product/{slug}','App\Http\Controllers\FontEndController@ProductByCategory') -> name('category.product');
@@ -46,6 +47,9 @@ Route::get('tag/{slug}', 'App\Http\Controllers\FontEndController@postByTag') -> 
 
 //post Search By Search Field
 Route::post('search', 'App\Http\Controllers\FontEndController@postBySearch') -> name('post.search');
+
+//Shop Search By Search Field
+Route::post('search-shop', 'App\Http\Controllers\FontEndController@ShopBySearch') -> name('shop.search');
 
 
 Auth::routes();
